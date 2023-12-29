@@ -1,0 +1,4 @@
+.ssh/*
+.zshenv
+.npmrc
+.wget-hsts
