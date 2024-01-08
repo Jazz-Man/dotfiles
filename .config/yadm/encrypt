@@ -1,4 +1,9 @@
-.ssh/*
+.ssh/config
+.ssh/known_hosts
+.ssh/id_*
+.ssh/*.pem
+.netrc
 .zshenv
 .npmrc
 .wget-hsts
+vsokolyk.asc

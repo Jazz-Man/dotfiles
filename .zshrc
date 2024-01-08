@@ -1,14 +1,11 @@
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
-else
-   export EDITOR='nvim'
-fi
-
 # I you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
 autoload -Uz promptinit
 promptinit
+
+
+autoload -U bashcompinit
+bashcompinit
+
 setopt HIST_IGNORE_ALL_DUPS
 setopt HIST_FIND_NO_DUPS
 setopt HIST_BEEP
@@ -31,17 +28,12 @@ ZSH_TMUX_FIXTERM_WITH_256COLOR=xterm-256color
 ZSH_TMUX_DEFAULT_SESSION_NAME=macos
 ZSH_TMUX_UNICODE=true
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && \. "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="af-magic" # set by `omz`
+ZSH_THEME="macos" # set by `omz`
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -101,7 +93,7 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ansible extract perms systemadmin npm pip rsync yarn brew composer docker docker-compose golang zsh-completions wp-cli macos universalarchive tmux doctl pnpm git-extras colored-man-pages httpie pyenv python git-flow-avh)
+plugins=(git ansible extract perms systemadmin npm rsync yarn brew composer docker docker-compose golang zsh-completions wp-cli macos universalarchive tmux doctl pnpm git-extras colored-man-pages httpie git-flow-avh poetry pyenv)
 
 autoload -U compinit && compinit
 
@@ -112,6 +104,10 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 # eval "$(pyenv init --path)"
+
+
+# Enable tab completion for pipx
+eval "$(register-python-argcomplete pipx)"
 
 
 function msf_docker() {
@@ -133,3 +129,9 @@ function msf_docker() {
 [[ -e "/Users/vasilsokolik/lib/oci_autocomplete.sh" ]] && source "/Users/vasilsokolik/lib/oci_autocomplete.sh"
 
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias mzsh="arch -arm64 zsh"
+alias izsh="arch -x86_64 zsh"
+
+
+# Created by `pipx` on 2024-01-07 18:56:44
+export PATH="$PATH:/Users/vasilsokolik/.local/bin"
