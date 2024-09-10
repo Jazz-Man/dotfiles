@@ -93,45 +93,61 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ansible extract perms systemadmin npm rsync yarn brew composer docker docker-compose golang zsh-completions wp-cli macos universalarchive tmux doctl pnpm git-extras colored-man-pages httpie git-flow-avh poetry pyenv)
+plugins=(git ansible extract perms systemadmin npm rsync yarn brew composer docker docker-compose golang zsh-completions wp-cli macos universalarchive tmux doctl git-extras colored-man-pages httpie git-flow-avh poetry pyenv valet bun nvm aws python)
 
 autoload -U compinit && compinit
 
 
 source $ZSH/oh-my-zsh.sh
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 # eval "$(pyenv init --path)"
 
+# Seamlessly manage your app’s Ruby environment with rbenv. https://github.com/rbenv/rbenv
+eval "$(rbenv init - zsh)"
 
 # Enable tab completion for pipx
 eval "$(register-python-argcomplete pipx)"
 
 
-function msf_docker() {
-   if [ -z "$(docker network ls | grep -w msf)" ];
-   then
-       docker network create --subnet=172.18.0.0/16 msf
-   fi
-   if [ -z "$(docker ps -a | grep -w postgres)" ];
-   then
-       docker run --ip 172.18.0.2 --network msf --rm --name postgres -v "${HOME}/.msf4/database:/var/lib/postgresql/data" -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres -e POSTGRES_DB=msf -d postgres:11-alpine
-   fi
-   docker run --rm -it -u 0 --network msf --name msf --ip 172.18.0.3 -v "${HOME}/.msf4:/home/msf/.msf4" -p 8443-8500:8443-8500 tleemcjr/metasploitable2
- }
-
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
+# [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
 
-[[ -e "/Users/vasilsokolik/lib/oci_autocomplete.sh" ]] && source "/Users/vasilsokolik/lib/oci_autocomplete.sh"
+[[ -e "$HOME/lib/oci_autocomplete.sh" ]] && source "$HOME/lib/oci_autocomplete.sh"
 
-alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias mzsh="arch -arm64 zsh"
 alias izsh="arch -x86_64 zsh"
 
 
 # Created by `pipx` on 2024-01-07 18:56:44
-export PATH="$PATH:/Users/vasilsokolik/.local/bin"
+export PATH="$PATH:$HOME/.local/bin"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+
+
+zplug "g-plane/pnpm-shell-completion", hook-build:"./zplug.zsh", defer:2
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+
+# Then, source plugins and add commands to $PATH
+zplug load --verbose
