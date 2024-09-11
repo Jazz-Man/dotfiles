@@ -99,16 +99,7 @@ autoload -U compinit && compinit
 
 
 source $ZSH/oh-my-zsh.sh
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
 
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-# eval "$(pyenv init --path)"
-
-# Seamlessly manage your app’s Ruby environment with rbenv. https://github.com/rbenv/rbenv
-eval "$(rbenv init - zsh)"
 
 # Enable tab completion for pipx
 eval "$(register-python-argcomplete pipx)"
@@ -118,9 +109,6 @@ alias mzsh="arch -arm64 zsh"
 alias izsh="arch -x86_64 zsh"
 
 
-# Created by `pipx` on 2024-01-07 18:56:44
-export PATH="$PATH:$HOME/.local/bin"
-
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
@@ -128,9 +116,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
 
 
 zplug "g-plane/pnpm-shell-completion", hook-build:"./zplug.zsh", defer:2

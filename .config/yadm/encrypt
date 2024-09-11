@@ -4,7 +4,6 @@
 .ssh/known_hosts
 .ssh/id_*
 .ssh/*.pem
-.zshenv
 .npmrc
 .wget-hsts
 vsokolyk.asc
