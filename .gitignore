@@ -532,3 +532,14 @@ modules.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/ssh
 .php_cs.cache
+
+
+
+# all for yadm
+!/.config/
+
+.config/lnav/view-info-*.json
+/.config/lnav/crash/*
+/.config/lnav/*.db
+/.config/lnav/remote-config/
+/.config/lnav/*.history

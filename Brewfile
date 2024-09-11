@@ -84,6 +84,7 @@ brew "ghostscript"
 brew "git"
 brew "git-delta"
 brew "git-extras"
+brew "git-filter-repo"
 brew "git-flow-avh"
 brew "libgcrypt"
 brew "gnupg"
@@ -224,6 +225,4 @@ mas "Keynote", id: 409183694
 mas "Microsoft Remote Desktop", id: 1295203466
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
-mas "Slack", id: 803453959
 mas "Squirrel", id: 1669664068
-mas "WireGuard", id: 1451685025
