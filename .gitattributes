@@ -1,0 +1,12 @@
+*.php diff=php
+*.css diff=css
+*.scss diff=css
+*.sass diff=css
+*.md diff=markdown
+*.html diff=html
+*.json diff=json
+*.zip diff=zip
+*.tgz diff=tgz
+*.tar.gz diff=tgz
+*.sql.gz diff=gz
+*.db diff=sqlite3

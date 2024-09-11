@@ -1,0 +1,9 @@
+set shell zsh
+set drawbox
+set shellopts '-euy'
+set ifs "\n"
+set filesep "\n"  # default already
+
+# Command/Mapping to create new directories
+cmd mkdir %mkdir -p "$@"
+map a push :mkdir<space>

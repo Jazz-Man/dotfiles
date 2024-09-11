@@ -114,12 +114,6 @@ eval "$(rbenv init - zsh)"
 eval "$(register-python-argcomplete pipx)"
 
 
-# tabtab source for packages
-# uninstall by removing these lines
-# [[ -f ~/.config/tabtab/zsh/__tabtab.zsh ]] && . ~/.config/tabtab/zsh/__tabtab.zsh || true
-
-[[ -e "$HOME/lib/oci_autocomplete.sh" ]] && source "$HOME/lib/oci_autocomplete.sh"
-
 alias mzsh="arch -arm64 zsh"
 alias izsh="arch -x86_64 zsh"
 
